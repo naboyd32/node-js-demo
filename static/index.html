@@ -65,12 +65,21 @@ navigation">
         <br>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
     </div>
     <div id="weather">
+    
     </div>
   </div>
   <!-- /.container -->
   <script>
   (function() {
-
+    let weather = new XMLHttpRequest();
+    weather.open("GET", "/weather.json");
+    weather.onload = function(){
+        let myWeather = JSON.parse(weather.responseText);
+        let temp = myWeather.currentLocation.temperature;
+        let weatherSpot = document.querySelector("#weather");
+        weatherSpot.textContent = temp;
+    };
+    weather.send();
   })();
   </script>
 </body>
